@@ -1,0 +1,17 @@
+In this assignment, you will learn how to work with Web API's in Python. For this specific challenge you will be extracting jokes from the Chuk Norris Database API. You will be given specific joke 'ID' and you have to get the joke for the corresponding joke ID. 
+
+
+Example For a Joke with ID '1' you will make a GET request at following url -
+
+Example Url
+
+http://api.icndb.com/jokes/15
+
+Output Joke
+
+Chuck Norris uses ribbed condoms inside out, so he gets the pleasure.
+
+Submission Guidelines
+For the given joke ID's in Testcases, scrape the the jokes for the given ID's and submit a CSV as shown in sample output.
+Scoring & Leaderboard
+Your score will be based upon percentage of jokes correctly matched with given ID's.
