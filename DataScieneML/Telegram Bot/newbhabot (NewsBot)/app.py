@@ -4,7 +4,7 @@ import logging
 from flask import Flask,request
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Dispatcher
 import os
-from telegram import Bot, Update, ReplyKeyboardMarkup
+from telegram import Bot, Update
 from dia1 import get_reply,fetch_news,topics_keyboards
 
 #enable logging
@@ -32,7 +32,6 @@ def webhook():
 
 
 def start(update,bot):
-    print("start func")
     author=update.message.chat.first_name
     reply="Hi, {}!".format(author)
     update.message.reply_text(text=reply)
@@ -75,19 +74,22 @@ def error(update,bot):
     logger.error("Update {} has caused error: ".format(update.message.chat.id))
 
 
-if __name__=="__main__":
-    bot=Bot(TOKEN)
-
+bot=Bot(TOKEN)
+try:
     bot.set_webhook("https://4a6701ec423d.ngrok.io/"+TOKEN)    
+except Exception as e:
+    print("Error occured ",e)
 
-    dp=Dispatcher(bot,None)
-    dp.add_handler(CommandHandler("start",start))
-    dp.add_handler(CommandHandler("help",_help))
-    dp.add_handler(CommandHandler("news",news))
-    #dp.add_handler(MessageHandler(Filters.text,echo_text))
-    dp.add_handler(MessageHandler(Filters.sticker,echo_sticker))
-    dp.add_handler(MessageHandler(Filters.text,reply_text))
-    dp.add_error_handler(error)
+dp=Dispatcher(bot,None)
+dp.add_handler(CommandHandler("start",start))
+dp.add_handler(CommandHandler("help",_help))
+dp.add_handler(CommandHandler("news",news))
+#dp.add_handler(MessageHandler(Filters.text,echo_text))
+dp.add_handler(MessageHandler(Filters.sticker,echo_sticker))
+dp.add_handler(MessageHandler(Filters.text,reply_text))
+dp.add_error_handler(error)
+
+if __name__=="__main__":
     app.run(port=8443)
 
 
