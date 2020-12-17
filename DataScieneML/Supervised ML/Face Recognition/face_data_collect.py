@@ -22,7 +22,7 @@ face_data=[]
 data_path="./data/"
 
 
-file_name=input("Enter the name of the person: ")
+file_name="raghav"  #input("Enter the name of the person: ")
 
 while True:
 

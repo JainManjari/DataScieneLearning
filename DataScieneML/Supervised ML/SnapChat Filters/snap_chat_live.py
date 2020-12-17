@@ -23,19 +23,19 @@ while True:
     noses=nose_cascade.detectMultiScale(frame,1.1,5)
 
     for (x,y,w,h) in eyes:
-        glasses=cv2.resize(glasses,(w-10,h+10))
+        glasses=cv2.resize(glasses,(w+10,h+8))
         for i in range(glasses.shape[0]):
             for j in range(glasses.shape[1]):
                 if(glasses[i,j,3]>0):
-                    frame[y+i,x+j,:]=glasses[i,j,:-1]
+                    frame[y+i,x+j-4,:]=glasses[i,j,:-1]
 
     
-    # for (x,y,w,h) in noses:
-    #     mustache=cv2.resize(mustache,(w+10,h-20))
-    #     for i in range(mustache.shape[0]):
-    #         for j in range(mustache.shape[1]):
-    #             if(mustache[i,j,3]>0):
-    #                 frame[y+i+40,x+j,:]=mustache[i,j,:-1]
+    for (x,y,w,h) in noses[:1]:
+        mustache=cv2.resize(mustache,(w+20,h-5))
+        for i in range(mustache.shape[0]):
+            for j in range(mustache.shape[1]):
+                if(mustache[i,j,3]>0):
+                    frame[y+i+20,x+j-4,:]=mustache[i,j,:-1]
 
     
     cv2.imshow("Image ",frame)
